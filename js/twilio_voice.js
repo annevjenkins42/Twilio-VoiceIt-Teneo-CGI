@@ -156,6 +156,7 @@ const sessionHandler = this.SessionHandler();
             console.log("body: " );
             console.log(body);
             var post = qs.parse(body);
+            const callSid = post.CallSid;
 
             if(body!==undefined && body!="" && body!="{}" && post.From===undefined) {
                 var parsed = JSON.parse(body);
@@ -247,18 +248,20 @@ const sessionHandler = this.SessionHandler();
                 teneoSessionId=passedSessionId;   
                  console.log("session: " + teneoSessionId);
                 //userInput = "switchoversuccess"; 
-                if(channel!="geoloc") {
-                  sessionHandler.setSession(phone, teneoSessionId);
+                if(channel!="geoloc" && callSid!==undefined) {
+                  sessionHandler.setSession(callSid, teneoSessionId);
                 }
             }       
                     
                     
             var TWILIO_MODE = "ivr";   
                  // get the caller id
-                const callSid = post.CallSid;
+                
                 if(callSid===undefined && channel!="geoloc") {
+                    sessionHandler.setSession(phone, teneoSessionId);
                     if(post.From== TWILIO_OUTBOUND_NUMBER_WA || post.To==TWILIO_OUTBOUND_NUMBER_WA) {
                         TWILIO_MODE="whatsapp";
+                        
                     }
                     else {
                         TWILIO_MODE="sms";
@@ -303,7 +306,12 @@ const sessionHandler = this.SessionHandler();
                     channel="geoloc";
                 }
                 else {
-                   teneoSessionId = sessionHandler.getSession(phone);
+                   if(callSid!==undefined) {
+                        teneoSessionId = sessionHandler.getSession(callSid);
+                   }
+                    else {
+                       teneoSessionId = sessionHandler.getSession(phone); 
+                    }
                 }
                   
                 //console.log("Phone: " + phone);
@@ -388,7 +396,7 @@ const sessionHandler = this.SessionHandler();
                
                 console.log("Output response 3: " + teneoResponse.output.text);
                  if(TWILIO_MODE=="ivr") {
-                    sessionHandler.setSession(phone, teneoSessionId);
+                    sessionHandler.setSession(callSid, teneoSessionId);
                 if(twilioAction === postPath.default || twilioAction==undefined || twilioAction=="") {
                     twilioAction = twilioActions.gather_default;
                 }
