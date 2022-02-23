@@ -274,7 +274,7 @@ const sessionHandler = this.SessionHandler();
                     }
                 //}
                 var channel = TWILIO_MODE;
-
+                   
                  if(TWILIO_MODE=="whatsapp") {
                      channel="twilio-whatsapp";
                 if(!phone.startsWith("whatsapp:")) {
@@ -298,7 +298,14 @@ const sessionHandler = this.SessionHandler();
                }*/
                 
                 teneoSessionId = sessionHandler.getSession(phone);
-                                
+                if(teneoSessionId=="") {
+                   var checkphone=phone.replace("whatsapp:","");
+                    teneoSessionId = sessionHandler.getSession(checkphone);
+                    if(teneoSessionId=="") {
+                        checkphone="whatsapp:" + phone;
+                         teneoSessionId = sessionHandler.getSession(checkphone);
+                    }
+                }
                 console.log("session ID retrieved: " + teneoSessionId);
                 console.log("mode in inbound: " + TWILIO_MODE);        
 
