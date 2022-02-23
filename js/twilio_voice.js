@@ -284,7 +284,7 @@ const sessionHandler = this.SessionHandler();
                   phone = post.From;  
                 } 
                 }
-                //console.log("Phone: " + phone);
+                console.log("Phone: " + phone);
 
                 // check if we have stored an engine sessionid for this caller
                /*if(userInput==undefined || userInput=="") {
