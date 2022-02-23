@@ -561,6 +561,7 @@ const sessionHandler = this.SessionHandler();
                 console.log("session: " + teneoSessionId);
                sessionHandler.setSession(phone, teneoSessionId);
             }
+             console.log("mode XXX: " + TWILIO_MODE);    
             if(TWILIO_MODE=="ivr") {
                 //const callSid = post.CallSid;
                 const url = "https://" + req.headers["host"] + "/?phone="+phone+"&session="+teneoSessionId+"&contractNum="+contractNum+"&email="+email+"&userInput="+userInput+"&arrears="+arrears+"&fname="+fname+"&numMissed="+numMissed+"&daysSince="+daysSince;
