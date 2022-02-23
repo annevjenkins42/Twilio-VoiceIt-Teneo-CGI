@@ -298,12 +298,14 @@ const sessionHandler = this.SessionHandler();
                }*/
                 
                 teneoSessionId = sessionHandler.getSession(phone);
-                if(teneoSessionId=="") {
+                if(teneoSessionId=="" || teneoSessionId==undefined) {
                    var checkphone=phone.replace("whatsapp:","");
+                    console.log("checkphone: " + checkphone);
                     teneoSessionId = sessionHandler.getSession(checkphone);
-                    if(teneoSessionId=="") {
+                    if(teneoSessionId==""  || teneoSessionId==undefined) {
                         checkphone="whatsapp:" + phone;
                          teneoSessionId = sessionHandler.getSession(checkphone);
+                        console.log("checkphone: " + checkphone);
                     }
                 }
                 console.log("session ID retrieved: " + teneoSessionId);
