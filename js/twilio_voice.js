@@ -562,6 +562,7 @@ const sessionHandler = this.SessionHandler();
                sessionHandler.setSession(phone, teneoSessionId);
             }
              console.log("mode XXX: " + TWILIO_MODE);    
+            console.log("phone: " + phone);
             if(TWILIO_MODE=="ivr") {
                 //const callSid = post.CallSid;
                 const url = "https://" + req.headers["host"] + "/?phone="+phone+"&session="+teneoSessionId+"&contractNum="+contractNum+"&email="+email+"&userInput="+userInput+"&arrears="+arrears+"&fname="+fname+"&numMissed="+numMissed+"&daysSince="+daysSince;
@@ -585,7 +586,7 @@ const sessionHandler = this.SessionHandler();
             
                     var contentToTeneo = {'text': userInput, "parameters": JSON.stringify(parameters), "channel":channel, "arrearsContractNum":contractNum
                                          , "arrearsAmt":arrears , "arrearsName":fname , "numMissed":numMissed, "daysSince":daysSince, "contractEmail":email};
-                    //console.log("Content to Teneo: " + JSON.stringify(contentToTeneo).toString());
+                    console.log("Content to Teneo: " + JSON.stringify(contentToTeneo).toString());
                     // Add "_phone" to as key to session to make each session, regardless when using call/sms
                     teneoResponse = await teneoApi.sendInput(teneoSessionId, contentToTeneo);
                      teneoSessionId = teneoResponse.sessionId;
