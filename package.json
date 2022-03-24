@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
-    "express": "*",
+    "express": "^4.17.1",
     "@artificialsolutions/tie-api-client": "*",
-    "body-parser": "*",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "http": "0.0.0",
     "path": "^0.12.7",
