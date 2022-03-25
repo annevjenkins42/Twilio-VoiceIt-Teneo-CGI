@@ -619,7 +619,7 @@ const sessionHandler = this.SessionHandler();
                      teneoSessionId = teneoResponse.sessionId;
                     console.log("session ID retrieved3: " + teneoSessionId);
                      console.log("Output response 1: " + teneoResponse.output.text);
-                    
+               }      
           
             // store engine sessionid for this sender
             
@@ -631,6 +631,15 @@ const sessionHandler = this.SessionHandler();
                    console.log("session ID retrieved4: " + teneoSessionId);
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                }
+               else if(TWILIO_MODE=="directsms") {
+                   sendDirectTwilioMessage(userInput, res, phone,TWILIO_OUTBOUND_NUMBER);
+                   res.writeHead(200, {'Content-Type': 'text/xml'});
+               }
+               else if(TWILIO_MODE=="directwa") {
+                   sendDirectTwilioMessage(userInput, res, "whatsapp:"+phone, TWILIO_OUTBOUND_NUMBER_WA);
+                       teneoSessionId = sessionHandler.getSession("whatsapp:"+phone);
+                       res.writeHead(302,  {Location: 'https://web.whatsapp.com'});
+               }   
             else {
                 sessionHandler.setSession("whatsapp:"+phone, teneoSessionId);
                 // return teneo answer to twilio
@@ -649,10 +658,7 @@ const sessionHandler = this.SessionHandler();
                 //res.writeHead(302,  {Location: 'https://api.whatsapp.com/send?phone=+14155238886'});
 
                 res.end();  
-            }
-                //do direct code here
-            }
-            
+            }        
         }
     }
     
