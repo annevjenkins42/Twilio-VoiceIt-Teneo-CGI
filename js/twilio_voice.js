@@ -73,6 +73,33 @@ function _stringify (o)
   
   return JSON.stringify( o, decircularise() );
 }
+
+function sendDirectTwilioMessage(text, res, triggerFrom, sendFrom) {
+    const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
+    console.log('trying to send direct outbound message: ${text}');
+
+client.messages
+      .create({
+         from: sendFrom,
+         body:  text,
+         to: triggerFrom
+       })
+      .then(message => console.log(message.sid));
+}
+ else {
+     //console.log('replying to inbound message: ${text}');
+  const message = text;
+  const twiml = new MessagingResponse();
+
+  twiml.message(message);
+
+  res.writeHead(200, { 'Content-Type': 'text/xml' });
+  res.end(twiml.toString());
+   //console.log(`twim1: ${twiml.toString()}`);
+ }
+}
+
     // compose and send message
 function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
 const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
@@ -583,7 +610,7 @@ const sessionHandler = this.SessionHandler();
                 res.end();  
             }
             else {
-            
+               if(TWILIO_MODE=="sms" || TWILIO_MODE=="whatsapp") {
                     var contentToTeneo = {'text': userInput, "parameters": JSON.stringify(parameters), "channel":channel, "arrearsContractNum":contractNum
                                          , "arrearsAmt":arrears , "arrearsName":fname , "numMissed":numMissed, "daysSince":daysSince, "contractEmail":email};
                     console.log("Content to Teneo: " + JSON.stringify(contentToTeneo).toString());
@@ -592,7 +619,7 @@ const sessionHandler = this.SessionHandler();
                      teneoSessionId = teneoResponse.sessionId;
                     console.log("session ID retrieved3: " + teneoSessionId);
                      console.log("Output response 1: " + teneoResponse.output.text);
-  
+                    
           
             // store engine sessionid for this sender
             
@@ -617,11 +644,15 @@ const sessionHandler = this.SessionHandler();
                     res.writeHead(200, {'Content-Type': 'text/xml', Location: 'https://api.whatsapp.com/send?phone=+14155238886'});
                 }
             }
+                    
                 //res.writeHead(200, {'Content-Type': 'text/xml', Location: 'https://api.whatsapp.com/send?phone=+14155238886'});
                 //res.writeHead(302,  {Location: 'https://api.whatsapp.com/send?phone=+14155238886'});
 
                 res.end();  
             }
+                //do direct code here
+            }
+            
         }
     }
     
