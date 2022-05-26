@@ -108,9 +108,13 @@ var mediaUrl=[''];
 if(Object.keys(teneoResponse.output.parameters).length !== 0) {
    if(Object.keys(teneoResponse.output.parameters).includes("MediaUrl")) {
       var mediaUrlStr = teneoResponse.output.parameters["MediaUrl"];
-      console.log("Media URL: " + mediaUrlStr);
+      
        if( mediaUrlStr!==undefined && mediaUrlStr!==null && mediaUrlStr!="") { 
             mediaUrl[0] = mediaUrlStr;   
+           console.log("Media URL in sendTwilioMessage: " + mediaUrlStr);
+       }
+       else {
+           mediaUrl=[];
        }
    }
 }
