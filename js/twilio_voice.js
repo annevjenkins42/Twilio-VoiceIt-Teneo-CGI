@@ -112,6 +112,7 @@ if(Object.keys(teneoResponse.output.parameters).length !== 0) {
        if( mediaUrlStr!==undefined && mediaUrlStr!==null && mediaUrlStr!="") { 
             mediaUrl[0] = mediaUrlStr;   
            console.log("Media URL in sendTwilioMessage: " + mediaUrlStr);
+           console.log("Media URL array in sendTwilioMessage: " + mediaUrl);
        }
        else {
            mediaUrl=[];
@@ -119,7 +120,7 @@ if(Object.keys(teneoResponse.output.parameters).length !== 0) {
    }
 }
 if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
-    console.log('trying to send outbound message: ${teneoResponse.output.text}');
+    console.log('trying to send outbound message: ' + ${teneoResponse.output.text});
     //console.log(`to: ${triggerFrom}`)
     //console.log(`from: ${sendFrom}`)
 client.messages
