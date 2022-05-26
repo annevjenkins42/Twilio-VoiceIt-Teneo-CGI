@@ -124,7 +124,7 @@ if(mediaUrlStr!="") {
       .create({
          from: sendFrom,
          to: triggerFrom,
-         mediaUrL: mediaUrl
+         mediaUrL: mediaUrlStr
        })
       .then(message => console.log(message.sid));
 }
