@@ -103,17 +103,14 @@ client.messages
     // compose and send message
 function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
 const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-var mediaUrl="";
+var mediaUrl=[""];
 // Detect if Teneo solution have provided a Twilio action as output parameter
 if(Object.keys(teneoResponse.output.parameters).length !== 0) {
    if(Object.keys(teneoResponse.output.parameters).includes("MediaUrl")) {
-      mediaUrl = teneoResponse.output.parameters["MediaUrl"];
-      console.log("Media URL: " + mediaUrl);
-       if( mediaUrl!==undefined && mediaUrl!==null && mediaUrl!="") { 
-            mediaUrl = " [" + mediaUrl + "]";   
-       }
-       else {
-          mediaUrl="";   
+      var mediaUrlStr = teneoResponse.output.parameters["MediaUrl"];
+      console.log("Media URL: " + mediaUrlStr);
+       if( mediaUrlStr!==undefined && mediaUrlStr!==null && mediaUrlStr!="") { 
+            mediaUrl[0] = mediaUrlStr;   
        }
    }
 }
@@ -126,7 +123,7 @@ client.messages
          from: sendFrom,
          body:  teneoResponse.output.text,
          to: triggerFrom,
-         mediaUrL: [mediaUrl]
+         mediaUrL: mediaUrl
        })
       .then(message => console.log(message.sid));
 }
