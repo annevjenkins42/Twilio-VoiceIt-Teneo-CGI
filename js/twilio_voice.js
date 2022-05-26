@@ -104,18 +104,15 @@ client.messages
 function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
 const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 var mediaUrl=[''];
+var mediaUrlStr="";     
 // Detect if Teneo solution have provided a Twilio action as output parameter
 if(Object.keys(teneoResponse.output.parameters).length !== 0) {
    if(Object.keys(teneoResponse.output.parameters).includes("MediaUrl")) {
-      var mediaUrlStr = teneoResponse.output.parameters["MediaUrl"];
+      mediaUrlStr = teneoResponse.output.parameters["MediaUrl"];
       
        if( mediaUrlStr!==undefined && mediaUrlStr!==null && mediaUrlStr!="") { 
             mediaUrl[0] = mediaUrlStr;   
            console.log("Media URL in sendTwilioMessage: " + mediaUrlStr);
-           console.log("Media URL array in sendTwilioMessage: " + mediaUrl.toString());
-       }
-       else {
-           mediaUrl=[];
        }
    }
 }
@@ -123,6 +120,17 @@ if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
     console.log('trying to send outbound message:  + ${teneoResponse.output.text}');
     //console.log(`to: ${triggerFrom}`)
     //console.log(`from: ${sendFrom}`)
+if(mediaUrlStr!="") {
+    client.messages
+      .create({
+         from: sendFrom,
+         to: triggerFrom,
+         mediaUrL: mediaUrl
+       })
+      .then(message => console.log(message.sid));
+}
+if(teneoResponse.output.text!="") {    
+    
 client.messages
       .create({
          from: sendFrom,
@@ -131,6 +139,7 @@ client.messages
          mediaUrL: mediaUrl
        })
       .then(message => console.log(message.sid));
+}
 }
  else {
      //console.log('replying to inbound message: ${teneoResponse.output.text}');
