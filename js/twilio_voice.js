@@ -103,7 +103,7 @@ client.messages
     // compose and send message
 function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
 const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-var mediaUrl=[""];
+var mediaUrl=[''];
 // Detect if Teneo solution have provided a Twilio action as output parameter
 if(Object.keys(teneoResponse.output.parameters).length !== 0) {
    if(Object.keys(teneoResponse.output.parameters).includes("MediaUrl")) {
