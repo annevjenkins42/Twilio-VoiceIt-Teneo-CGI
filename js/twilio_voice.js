@@ -118,8 +118,7 @@ if(Object.keys(teneoResponse.output.parameters).length !== 0) {
 }
 if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
     console.log('trying to send outbound message:  + ${teneoResponse.output.text}');
-    //console.log(`to: ${triggerFrom}`)
-    //console.log(`from: ${sendFrom}`)
+
 if(mediaUrlStr!="") {
     client.messages
       .create({
@@ -129,8 +128,7 @@ if(mediaUrlStr!="") {
        })
       .then(message => console.log(message.sid));
 }
-if(teneoResponse.output.text!="") {    
-    
+else if(teneoResponse.output.text!="") {    
 client.messages
       .create({
          from: sendFrom,
@@ -139,6 +137,7 @@ client.messages
          mediaUrL: mediaUrl
        })
       .then(message => console.log(message.sid));
+}
 }
 }
  else {
