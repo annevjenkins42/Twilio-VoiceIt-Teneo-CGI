@@ -128,7 +128,7 @@ if(mediaUrlStr!="") {
        })
       .then(message => console.log(message.sid));
 }
-else if(teneoResponse.output.text!="") {    
+   
 client.messages
       .create({
          from: sendFrom,
@@ -138,8 +138,6 @@ client.messages
        })
       .then(message => console.log(message.sid));
 }
-
-
  else {
      //console.log('replying to inbound message: ${teneoResponse.output.text}');
   const message = teneoResponse;
