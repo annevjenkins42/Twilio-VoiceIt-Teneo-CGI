@@ -138,8 +138,8 @@ client.messages
        })
       .then(message => console.log(message.sid));
 }
-}
-}
+
+
  else {
      //console.log('replying to inbound message: ${teneoResponse.output.text}');
   const message = teneoResponse;
