@@ -379,13 +379,13 @@ const sessionHandler = this.SessionHandler();
                                          , "arrearsAmt":arrears , "arrearsName":fname , "numMissed":numMissed, "daysSince":daysSince, "contractEmail":email};
                 }
 
-                //console.log("Content to Teneo INBOUND: " + JSON.stringify(contentToTeneo).toString());
+                console.log("Content to Teneo INBOUND: " + JSON.stringify(contentToTeneo).toString());
                 
                 
                 // Add "_phone" to as key to session to make each session, regardless when using call/sms
                     teneoResponse = await teneoApi.sendInput(teneoSessionId, contentToTeneo);
                 teneoSessionId = teneoResponse.sessionId;
-                
+                 console.log("Output response 2: " + JSON.stringify(teneoResponse).toString());
                 var hintMode = "";
                 var hintText;
                 // Detect if Teneo solution have provided a Twilio action as output parameter
