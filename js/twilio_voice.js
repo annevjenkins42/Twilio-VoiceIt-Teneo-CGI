@@ -128,15 +128,23 @@ if(mediaUrlStr!="") {
        })
       .then(message => console.log(message.sid));
 }
-   
-client.messages
+//break it into pieces and send
+var pieces  = teneoResponse.output.text.split("||")
+var i = 0;
+
+while (i < pieces.length) {
+    console.log(pieces[i]);
+    client.messages
       .create({
          from: sendFrom,
-         body:  teneoResponse.output.text,
+         body:  pieces[i],
          to: triggerFrom,
          mediaUrL: mediaUrl
        })
       .then(message => console.log(message.sid));
+    i++;
+}  
+
 }
  else {
      //console.log('replying to inbound message: ${teneoResponse.output.text}');
