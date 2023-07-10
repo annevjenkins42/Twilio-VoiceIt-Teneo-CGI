@@ -1,5 +1,4 @@
 "use strict";
-import { setTimeout } from 'timers/promises';
 
 const qs = require('querystring');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
@@ -45,7 +44,13 @@ var confidence = "";
 var flow = "";
 
 
-
+function wait(ms){
+   var start = new Date().getTime();
+   var end = start;
+   while(end < start + ms) {
+     end = new Date().getTime();
+  }
+}
 
 
 // Initiates the biometric authentication solution
@@ -144,7 +149,7 @@ while (i < pieces.length) {
        })
       .then(message => console.log(message.sid));
     i++;
-    await setTimeout(1000);
+    wait(1000);
 }  
 
 }
