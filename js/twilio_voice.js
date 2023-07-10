@@ -1,4 +1,5 @@
 "use strict";
+import { setTimeout } from 'timers/promises';
 
 const qs = require('querystring');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
@@ -143,6 +144,7 @@ while (i < pieces.length) {
        })
       .then(message => console.log(message.sid));
     i++;
+    await setTimeout(1000);
 }  
 
 }
