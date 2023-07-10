@@ -139,17 +139,19 @@ var pieces  = teneoResponse.output.text.split("||")
 var i = 0;
 
 while (i < pieces.length) {
+   sendDirectTwilioMessage(pieces[i], res, triggerFrom, sendFrom);
+    
     console.log(pieces[i]);
-    client.messages
+    /*client.messages
       .create({
          from: sendFrom,
          body:  pieces[i],
          to: triggerFrom,
          mediaUrL: mediaUrl
        })
-      .then(message => console.log(message.sid));
+      .then(message => console.log(message.sid));*/
     i++;
-    wait(2000);
+    wait(500);
 }  
 
 }
