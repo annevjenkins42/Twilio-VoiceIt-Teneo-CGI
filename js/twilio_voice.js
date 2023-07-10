@@ -98,10 +98,10 @@ client.messages
   const message = text;
   const twiml = new MessagingResponse();
 
- await twiml.message(message);
+ await twiml.message(message) setTimeout(1000);
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
-  res.end(twiml.toString());
+  await res.end(twiml.toString());
    //console.log(`twim1: ${twiml.toString()}`);
  }
 }
@@ -139,7 +139,7 @@ var pieces  = teneoResponse.output.text.split("||")
 var i = 0;
 
 while (i < pieces.length) {
-   await sendDirectTwilioMessage(pieces[i], res, triggerFrom, sendFrom);
+   await sendDirectTwilioMessage(pieces[i], res, triggerFrom, sendFrom) setTimeout(1000);
     
     console.log(pieces[i]);
     /*client.messages
