@@ -149,7 +149,7 @@ while (i < pieces.length) {
        })
       .then(message => console.log(message.sid));
     i++;
-    wait(1000);
+    wait(2000);
 }  
 
 }
