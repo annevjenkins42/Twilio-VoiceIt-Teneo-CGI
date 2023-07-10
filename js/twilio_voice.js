@@ -44,7 +44,7 @@ var confidence = "";
 var flow = "";
 
 
-function wait(ms){
+async function wait(ms){
    var start = new Date().getTime();
    var end = start;
    while(end < start + ms) {
@@ -85,7 +85,7 @@ async function sendDirectTwilioMessage(text, res, triggerFrom, sendFrom) {
 if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
     console.log('trying to send direct outbound message: ${text}');
 
-client.messages
+await client.messages
       .create({
          from: sendFrom,
          body:  text,
@@ -100,7 +100,7 @@ client.messages
 
  await twiml.message(message);
 
-  res.writeHead(200, { 'Content-Type': 'text/xml' });
+ await res.writeHead(200, { 'Content-Type': 'text/xml' });
   await res.end(twiml.toString());
    //console.log(`twim1: ${twiml.toString()}`);
  }
@@ -126,7 +126,7 @@ if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
     console.log('trying to send outbound message:  + ${teneoResponse.output.text}');
 
 if(mediaUrlStr!="") {
-    client.messages
+    await client.messages
       .create({
          from: sendFrom,
          to: triggerFrom,
@@ -151,7 +151,7 @@ while (i < pieces.length) {
        })
       .then(message => console.log(message.sid));*/
     i++;
-    wait(1000);
+    await wait(1000);
 }  
 
 }
