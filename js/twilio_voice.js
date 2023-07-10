@@ -80,7 +80,7 @@ function _stringify (o)
   return JSON.stringify( o, decircularise() );
 }
 
-function sendDirectTwilioMessage(text, res, triggerFrom, sendFrom) {
+async function sendDirectTwilioMessage(text, res, triggerFrom, sendFrom) {
     const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 if(triggerFrom!==undefined && triggerFrom!==null && triggerFrom!="") {
     console.log('trying to send direct outbound message: ${text}');
@@ -98,7 +98,7 @@ client.messages
   const message = text;
   const twiml = new MessagingResponse();
 
-  twiml.message(message);
+ await twiml.message(message);
 
   res.writeHead(200, { 'Content-Type': 'text/xml' });
   res.end(twiml.toString());
@@ -107,7 +107,7 @@ client.messages
 }
 
     // compose and send message
-function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
+async function sendTwilioMessage(teneoResponse, res, triggerFrom, sendFrom) {
 const client = require('twilio')(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 var mediaUrl=[''];
 var mediaUrlStr="";     
@@ -139,7 +139,7 @@ var pieces  = teneoResponse.output.text.split("||")
 var i = 0;
 
 while (i < pieces.length) {
-   sendDirectTwilioMessage(pieces[i], res, triggerFrom, sendFrom);
+   await sendDirectTwilioMessage(pieces[i], res, triggerFrom, sendFrom);
     
     console.log(pieces[i]);
     /*client.messages
