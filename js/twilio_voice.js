@@ -451,8 +451,6 @@ const sessionHandler = this.SessionHandler();
                             language: twilioLanguage
                         }, teneoResponse.output.text);
                        
-
-console.log(response.toString());
                         res.writeHead(200, {'Content-Type': 'text/xml'});
                         res.end(twiml.toString());
                         break;
