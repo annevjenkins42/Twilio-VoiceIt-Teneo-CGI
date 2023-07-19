@@ -431,12 +431,14 @@ const sessionHandler = this.SessionHandler();
                     // Twilio action to handle voice inputs by end-user, speaking to the end user and then capturing the voice subsequently.
                     case twilioActions.gather_default:
                         var twiml = new VoiceResponse();
-                         const start = twiml.start();
+                         if(userInput=="" || userInput===undefined) {
+                          const start = twiml.start();
                          console.log("starting audio stream");
                         start.stream({
                             name: 'Example Audio Stream',
-                            url: 'wss://third-json-test.herokuapp.com:8080/'
+                            url: 'wss://wss-test-6f955ec9be86.herokuapp.com:8080/'
                         });
+                        }
                         twiml.gather({
                             input: 'speech dtmf',
                             action: postPath.default,
