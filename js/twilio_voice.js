@@ -666,11 +666,11 @@ const sessionHandler = this.SessionHandler();
                     res.writeHead(200, {'Content-Type': 'text/xml'});
                }
                else if(TWILIO_MODE=="directsms") {
-                   sendDirectTwilioMessage(userInput, res, phone,TWILIO_OUTBOUND_NUMBER);
+                   sendTwilioMessage(userInput, res, phone,TWILIO_OUTBOUND_NUMBER);
                    res.writeHead(200, {'Content-Type': 'text/xml'});
                }
                else if(TWILIO_MODE=="directwa") {
-                   sendDirectTwilioMessage(userInput, res, "whatsapp:"+phone, TWILIO_OUTBOUND_NUMBER_WA);
+                   sendTwilioMessage(userInput, res, "whatsapp:"+phone, TWILIO_OUTBOUND_NUMBER_WA);
                        teneoSessionId = sessionHandler.getSession("whatsapp:"+phone);
                        res.writeHead(302,  {Location: 'https://web.whatsapp.com'});
                }   
