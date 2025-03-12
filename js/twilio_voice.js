@@ -644,7 +644,9 @@ const inputHandler = this.InputHandler();
                     teneoResponse = await teneoApi.sendInput(teneoSessionId, contentToTeneo);
                      teneoSessionId = teneoResponse.sessionId;
                     console.log("session ID retrieved3: " + teneoSessionId);
-                     console.log("Output response 1: " + teneoResponse.output.text);
+                     userInput = teneoResponse.output.text;
+                     console.log("Output response 1: " + userInput);
+                   inputHandler.setInput(phone, userInput);
                }      
           
             // store engine sessionid for this sender
