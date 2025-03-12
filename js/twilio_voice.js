@@ -268,7 +268,7 @@ const inputHandler = this.InputHandler();
               
             console.log("Passed session: " + passedSessionId);
             if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
-                teneoSessionId=sessionHandler.getSesssion(phone);
+                teneoSessionId=sessionHandler.getSession(phone);
                 if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
                     teneoSessionId="";
                 }
