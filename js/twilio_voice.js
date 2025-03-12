@@ -266,9 +266,12 @@ const inputHandler = this.InputHandler();
                 }
                 //console.log("email: " + email);  
               
-            //console.log("Passed session: " + passedSessionId);
+            console.log("Passed session: " + passedSessionId);
             if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
-                teneoSessionId=""
+                teneoSessionId=sessionHandler.getSesssion(phone);
+                if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
+                    teneoSessionId="";
+                }
             }
             else {
                 teneoSessionId=passedSessionId;   
@@ -276,7 +279,7 @@ const inputHandler = this.InputHandler();
                 //userInput = "switchoversuccess"; 
                 sessionHandler.setSession(phone, teneoSessionId);
             }       
-                    
+             console.log("Session after phone lookup: " + teneoSessionId);        
                     
             var TWILIO_MODE = "ivr";   
                  // get the caller id
