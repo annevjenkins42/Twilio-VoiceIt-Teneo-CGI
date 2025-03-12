@@ -434,7 +434,7 @@ const inputHandler = this.InputHandler();
                             actionOnEmptyResult: false,
                             language: twilioLanguage,
                             timeout: 2,
-                            speechModel: "phone_call",
+                            speechModel: "googlev2_telephony",
                             hints: hintText
                         }).say({
                             voice: twilioVoiceName,
