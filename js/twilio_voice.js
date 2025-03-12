@@ -433,7 +433,7 @@ const inputHandler = this.InputHandler();
                             action: postPath.default,
                             actionOnEmptyResult: false,
                             language: twilioLanguage,
-                            timeout: 5,
+                            timeout: 60,
                             speechTimeout: 'auto',
                             speechModel: "googlev2_telephony",
                             hints: hintText
