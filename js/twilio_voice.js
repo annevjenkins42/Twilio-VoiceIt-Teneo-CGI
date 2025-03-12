@@ -433,7 +433,7 @@ const inputHandler = this.InputHandler();
                             action: postPath.default,
                             actionOnEmptyResult: false,
                             language: twilioLanguage,
-                            timeout: 3,
+                            timeout: 2,
                             speechModel: "phone_call",
                             hints: hintText
                         }).say({
