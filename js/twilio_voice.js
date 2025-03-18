@@ -235,7 +235,7 @@ const inputHandler = this.InputHandler();
                     }
                 }   
                  
-              //console.log("phone: " + phone);  
+              console.log("phone 1: " + phone);  
                 if(contractNum===undefined) {
                     contractNum = "";
                 }
@@ -266,21 +266,7 @@ const inputHandler = this.InputHandler();
                 }
                 //console.log("email: " + email);  
               
-            console.log("Passed session in inbound: " + passedSessionId);
-            if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
-                teneoSessionId=sessionHandler.getSession(phone);
-                console.log("session INB 1: " + teneoSessionId);
-                if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
-                    teneoSessionId="";
-                }
-            }
-            else {
-                teneoSessionId=passedSessionId;   
-                console.log("session INB 1b: " + teneoSessionId);
-                //userInput = "switchoversuccess"; 
-                sessionHandler.setSession(phone, teneoSessionId);
-            }       
-             console.log("Session after phone lookup INB: " + teneoSessionId);        
+               
                     
             var TWILIO_MODE = "ivr";   
                  // get the caller id
@@ -315,7 +301,21 @@ const inputHandler = this.InputHandler();
                     }
                 //}
                 var channel = TWILIO_MODE;
-                   
+                console.log("Passed session in inbound: " + passedSessionId);
+                if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
+                    teneoSessionId=sessionHandler.getSession(phone);
+                    console.log("session INB 1: " + teneoSessionId);
+                    if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
+                        teneoSessionId="";
+                    }
+                }
+                else {
+                    teneoSessionId=passedSessionId;   
+                    console.log("session INB 1b: " + teneoSessionId);
+                    //userInput = "switchoversuccess"; 
+                    sessionHandler.setSession(phone, teneoSessionId);
+                }       
+             console.log("Session after phone lookup INB: " + teneoSessionId);        
                  if(TWILIO_MODE=="whatsapp") {
                      channel="twilio-whatsapp";
                 if(!phone.startsWith("whatsapp:")) {
@@ -477,6 +477,21 @@ const inputHandler = this.InputHandler();
               
                 }
                 else {
+                    console.log("Passed session in inbound: " + passedSessionId);
+                if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
+                    teneoSessionId=sessionHandler.getSession(phone);
+                    console.log("session INB 1: " + teneoSessionId);
+                    if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
+                        teneoSessionId="";
+                    }
+                }
+                else {
+                    teneoSessionId=passedSessionId;   
+                    console.log("session INB 1b: " + teneoSessionId);
+                    //userInput = "switchoversuccess"; 
+                    sessionHandler.setSession(phone, teneoSessionId);
+                }       
+             console.log("Session after phone lookup INB: " + teneoSessionId);     
                     sessionHandler.setSession(phone, teneoSessionId);
                      console.log("about to send message via " + TWILIO_MODE);
                     // return teneo answer to twilio
