@@ -161,7 +161,7 @@ const inputHandler = this.InputHandler();
         
 
         return async (req, res) => {
-            //console.log("INBOUND START " );
+            console.log("INBOUND START " );
             let body = '';
 
             req.on('data', function (data) {
@@ -266,20 +266,21 @@ const inputHandler = this.InputHandler();
                 }
                 //console.log("email: " + email);  
               
-            console.log("Passed session: " + passedSessionId);
+            console.log("Passed session in inbound: " + passedSessionId);
             if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
                 teneoSessionId=sessionHandler.getSession(phone);
+                console.log("session INB 1: " + teneoSessionId);
                 if(teneoSessionId===undefined || teneoSessionId===null || teneoSessionId=="") {
                     teneoSessionId="";
                 }
             }
             else {
                 teneoSessionId=passedSessionId;   
-                 //console.log("session: " + teneoSessionId);
+                console.log("session INB 1b: " + teneoSessionId);
                 //userInput = "switchoversuccess"; 
                 sessionHandler.setSession(phone, teneoSessionId);
             }       
-             console.log("Session after phone lookup: " + teneoSessionId);        
+             console.log("Session after phone lookup INB: " + teneoSessionId);        
                     
             var TWILIO_MODE = "ivr";   
                  // get the caller id
@@ -603,12 +604,16 @@ const inputHandler = this.InputHandler();
 
                 }
                 console.log("mode: " + TWILIO_MODE);    
+            console.log("Passed session 2: " + passedSessionId);
             if(passedSessionId===undefined || passedSessionId===null || passedSessionId=="") {
                 teneoSessionId="";
+                console.log("Passed session 2a: " + passedSessionId);
             }
             else {
                 teneoSessionId=passedSessionId;   
-                console.log("session: " + teneoSessionId);
+                console.log("session 2b: " + teneoSessionId);
+                console.log("phone 2b: " + phone);
+                console.log("Passed session 2b: " + passedSessionId);
                sessionHandler.setSession(phone, teneoSessionId);
             }
              console.log("mode XXX: " + TWILIO_MODE);    
@@ -630,7 +635,7 @@ const inputHandler = this.InputHandler();
                    sessionHandler.setSession(phone, teneoSessionId)   
                 );
                 teneoSessionId = sessionHandler.getSession(phone);
-                console.log("session: " + teneoSessionId);
+                console.log("session 3: " + teneoSessionId);
                 inputHandler.setInput(phone, userInput);
                 res.writeHead(200, {'Content-Type': 'text/xml'});
                 res.end();  
